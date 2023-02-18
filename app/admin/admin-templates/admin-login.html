@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/style.css') }}">
+{% endblock head %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block main %}
+<div class="form-wrapper">
+    <form class="admin-login-form" action="{{ url_for('admin.admin_login') }}" method="post">
+        <h1>Admin Login</h1>
+        {{ form.hidden_tag() }}
+        <!-- ---------------------------------------------- -->
+
+        {% for validate_class, message in get_flashed_messages(True) %}
+        <div class="block message-body {{ validate_class }}">
+            <p class="message">
+                {{ message }}
+            </p>
+        </div>
+        {% endfor %}
+
+        {% for field_name in form.errors %}
+        {% for error in form.errors[field_name] %}
+        <div class="block message-body invalide-message">
+            <p class="message">{{ error }}</p>
+        </div>
+        {% endfor %}
+        {% endfor %}
+
+        <!-- ---------------------------------------------- -->
+        {{ form.login(class='admin-login-inp', placeholder="Login") }}
+        {{ form.psw(class='admin-login-inp', placeholder="Password") }}
+        {{ form.submit(class='admin-login-inp admin-login-submit') }}
+    </form>
+</div>
+{% endblock %}

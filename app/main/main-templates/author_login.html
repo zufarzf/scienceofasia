@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %}
+
+{% block main %}
+
+<div class="pad_jo author_login_h">
+    <div class="main_journal_part author_login">
+        <div class="title_image">
+            <img src="{{ url_for('main.static', filename='images/authors_login.jpg') }}" alt="">
+        </div>
+        <div class="author_main-block">
+            <div class="table_block">
+                <table border="1" align="center" cellpadding="5" cellspacing="0" bordercolor="#D0C89F">
+
+                    <tbody>
+                        <form action="">
+                            <tr>
+                                <td bgcolor="#F0EEE1">MS Code No:</td>
+                                <td bgcolor="#F0EEE1"><input name="user" type="text" id="user" size="10" maxlength="9">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#F0EEE1">Password:</td>
+                                <td bgcolor="#F0EEE1"><input name="pwd" type="password" id="pwd" size="10"
+                                        maxlength="6"> (6 characters)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center" bgcolor="#DCD7B6"><b>
+                                        <input type="submit" name="Submit" id="Submit" value="Submit">
+                                    </b></td>
+                            </tr>
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p_text">
+                If you encounter with login problem either as authors or reviewers, please inform email to reset your password.
+            </div>
+        </div>
+    </div>
+</div>
+{% block adv %}
+<p class="p">
+    <a href="#">Advertise with us</a>|
+</p>{% endblock %} {% endblock %}

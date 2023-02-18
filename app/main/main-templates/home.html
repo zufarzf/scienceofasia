@@ -1,0 +1,167 @@
+{% extends 'base.html' %} {% block title %}ScienceAsia - Journal of The Science Society of Thailand{% endblock %} {%
+block main %}
+<div class="main_part">
+    <div class="central_part">
+
+        <!-- =======Google search and facebook link part========= -->
+
+        <div class="border_class">
+            <div class="google_search">
+                <form action="">
+                    <div class="google">
+                        <input type="text">
+                        <button>Google</button>
+                    </div>
+                    <div class="checkbox">
+                        <div class="first_check">
+                            <input type="radio" name="check" checked> Search scienceofasia.org
+                        </div>
+                        <div class="first_check">
+                            <input type="radio" name="check"> Search the Web
+                        </div>
+                        <div class="first_check">
+                            <input type="radio" name="check"> Keywords
+                        </div>
+                    </div>
+                </form>
+                <div class="facebook">
+                    <a href="http://www.facebook.com/ScienceAsia">
+                        <img src="{{ url_for('main.static', filename='images/facebook.jpg') }}" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="notice">
+                <div class="notice_title spec_title">
+                    <h4>IMPORTANT NOTICE</h4>
+                </div>
+                <marquee>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>
+                        <font color="red">***ScienceAsia has started the online published ahead of print from the issue
+                            48(3), 2022 onwards. *** </font> ::
+                        Authors please consult the Instructions for Authors updated on May 1, 2021 before preparing your
+                        manuscript. Use of manuscript template is recommended.
+                    </b>
+                </marquee>
+            </div>
+            <div class="main_items">
+                <div class="item_title1 spec_title">
+                    <h4>CURRENT REGULAR ISSUE</h4>
+                </div>
+                <div class="item1_image">
+                    <a href="{{ url_for('main.static', filename='images/item1.jpg') }}">
+                        <img class="spimg" src="{{ url_for('main.static', filename='images/item1.jpg') }}" alt="">
+                    </a>
+                    <div class="item1_text">
+                        <div class="title_part1">
+                            <p class="text">Volume 48 Number 6 (December 2022)</p>
+                            <p class="text"><a href="#">Table of Contents</a></p>
+                            <p class="text"><a href="#">Subscribe to ScienceAsia</a>(printed version)
+                            </p>
+                        </div>
+                        <div class="ul">
+                            <div class="ul_item">
+                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
+                                <a href="#">Symbiotic microbiota as a potent immunomodulator for human host</a><br>
+                            </div>
+
+                            <div class="ul_item">
+                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
+                                <a href="#">TRAIL-induced apoptosis combined with diosgenin: A novel gastric cancer
+                                    treatment</a><br>
+                            </div>
+
+                            <div class="ul_item">
+                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
+                                <a href="#">Anabolic effect of Kwao Khruea Daeng in orchidectomized rats</a><br>
+                            </div>
+
+                            <div class="ul_item">
+                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
+                                <a href="#">Proliferation of high glucose induced trophoblast cells treated with
+                                    dexmedetomidine</a><br>
+                            </div>
+
+                            <div class="ul_item">
+                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
+                                <a href="#">Lipoyl-substituted porphyrins as novel biocompatible mitochondria-targeting
+                                    agents</a><br>
+                            </div>
+
+                            <div class="ul_item">
+                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
+                                <a href="#">Adsorption of alizarin yellow and rhodamine B dyes on water hyacinth
+                                    leaves</a><br>
+                            </div>
+
+                            <div class="ul_item">
+                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
+                                <a href="#">The periodicity on a transcendental entire function</a><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="two_items">
+                <div class="first_i">
+                    <div class="spec_title fir">
+                        <h4>RECENT SUPPLEMENT/SPECIAL ISSUE</h4>
+                    </div>
+                    <div class="first_i1">
+                        <img src="{{ url_for('main.static', filename='images/item2.jpg') }}" alt="">
+                        <div class="f_i_t">
+                            <p>Volume 47S Number 1 (July 2021)</p>
+                            <a href="#">Table of Contents</a>
+                        </div>
+                    </div>
+                    <div class="first_i1">
+                        <img src="{{ url_for('main.static', filename='images/item3.jpg') }}" alt="">
+                        <div class="f_i_t">
+                            <p>Volume 48S Number 1 (February 2022) </p>
+                            <a href="#">Table of Contents</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="second_i">
+                    <div class="spec_title sec">
+                        <h4> ISSUES IN PROGRESS</h4>
+                    </div>
+                    <div class="items_block2">
+                        <p class="spp">In progress issues contain online articles which are citable using their doi
+                            numbers.</p>
+                        <div class="dif">
+                            <p>Volume 49 Issue 1 (February 2023)</p>
+                            <a href="#">Table of Contents</a>
+                        </div>
+                        <div class="dif">
+                            <p>Volume 49 Issue 2 (April 2023)</p>
+                            <a href="#">
+                                Table of Contents
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================end of the search part=============== -->
+
+    <div class="right_part">
+        <img src="{{ url_for('main.static', filename='images/right1.png') }}" alt="" class="first_image"><br>
+        <img src="{{ url_for('main.static', filename='images/right2.jpg') }}" alt="" class="second">
+        <p class="right_text">The Impact Factor for 2020 = 0.615</p>
+        <a href="#" class="right_link">
+            Web Usage Statistics
+        </a>
+        <div class="accept">
+            <h4>
+                ACCEPTED ARTICLES
+            </h4>
+            <a href="#">Table of Contents</a>
+            <p>
+                Accepted articles are corrected proof articles in which final details need to be futher assigned.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block image %}
+<img class="numbers" src="{{ url_for('main.static', filename='images/left-bar-number.png') }}" alt=""> {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %} {%
+block main %}
+
+<div class="pad_jo">
+    <div class="main_journal_part">
+        <div class="journal_image">
+            <img src="{{ url_for('main.static', filename='images/journal_policy.jpg') }}" alt="">
+        </div>
+        <div class="jour_text_block">
+            <div class="jour_text">
+                <div class="update_jo">Updated: April 1, 2019</div>
+                <p><em>ScienceAsia</em> is a multidisciplinary journal publishing papers of high quality bimonthly, in
+                    printed and electronic versions, by the Science Society of Thailand under Royal Patronage and the
+                    National Research Council of Thailand.
+                    The journal publishes original research papers that provide novel findings and important
+                    contribution to broad area in science and mathematics. Areas covered include Biological Sciences and
+                    Biotechnology, Chemistry and Material Sciences,
+                    Environmental and Applied Sciences, and Mathematics and Physical Sciences. Manuscripts may report
+                    scientifically useful data, observations or model predictions, and/or provide a new scientific
+                    concept or a new explanation of published
+                    results. Submissions of materials of current scientific interest are highly welcome, provided that
+                    there is sufficient scientific merit. The journal will not accept manuscripts which have been
+                    published or are being considered for
+                    publication elsewhere, nor should manuscripts being considered by ScienceAsia be submitted to other
+                    journals. Submitted manuscripts must conform to the guidelines given in the Instructions for Authors
+                    <a href="{{ url_for('main.instruction') }}">(https://www.scienceofasia.org/instruction_authors.php)</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

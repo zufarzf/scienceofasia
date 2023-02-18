@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %} {%
+block main %}
+
+
+<div class="kerak">
+    <div class="pad_jo ">
+        <div class="main_journal_part fix">
+            <div class="start_part">
+                <div class="next_link">
+                    <div class="link_prev">
+                        {% if pages[1] != False %}
+                        <img src="{{ url_for('main.static', filename='images/back.png') }}" alt="<">
+                        <a href="{{ url_for('main.volume_1', id=pages[1][0]) }}">{{ pages[1][1] }}</a>
+                        {% endif %}
+                    </div>
+                    <div class="link_prev">
+                        {% if pages[0] != False %}
+                        <a href="{{ url_for('main.volume_1', id=pages[0][0]) }}">{{ pages[0][1] }}</a>
+                        <img class="row-cl" src="{{ url_for('main.static', filename='images/back.png') }}" alt=">">
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="table_content">
+                    TABLE OF CONTENTS
+                </div>
+                <div class="name_of-page">
+                    {{ volume.name }} ({{ volume.date }})
+                </div>
+
+            </div>
+            {% if 'login' in session %}
+            <div class="admin_links">
+                <a class="admin_link category_link" href="{{ url_for('admin.add_category', id=volume.id) }}">Add
+                    category</a>
+            </div>
+            {% endif %}
+
+            {% for category in categories %}
+            <div class="content_items">
+                <p class="title_of_part">
+                    {{ category.name }}
+                    {% if 'login' in session %}
+                    {% if jurnals.filter_by(menu_id=category.id).first() == None %}
+                    <a class="category_button" href="{{ url_for('admin.delete_category', id=category.id) }}">Delete
+                        category</a>
+                    {% endif %}
+                    <a class="category_button" href="{{ url_for('admin.edit_category', id=category.id) }}">Edit
+                        category</a>
+                    <a class="category_button" href="{{ url_for('admin.add_article', id=category.id) }}">Add article
+                        +</a>
+                <div class="margin-div"></div>
+                {% endif %}
+                </p>
+
+                {% for jurnal in jurnals.filter_by(menu_id=category.id).all() %}
+                <div class="item">
+                    <b>{{ jurnal.title | safe }}</b>
+                    <em>{{ jurnal.authors}}</em><br>
+                    <p>{{ jurnal.doi_text | safe }}</p>
+
+                    {% if jurnal.valid_articles %}
+                    [ <a href="{{ url_for('main.abstract', id=jurnal.id) }}">Abstract</a> ]
+
+
+                    {% if jurnal.pdf_url == 'FalseNone' %}
+                    [ <a href="#">PDF</a> ]
+                    {% else %}
+                    [ <a href="{{ url_for('main.abstract', id=jurnal.id) }}">PDF</a> ]
+                    {% endif %}                    
+
+
+                    {% if 'login' in session %}
+                    [ <a href="{{ url_for('admin.delete_article', id=jurnal.id) }}">Delete article</a> ]
+                    [ <a href="{{ url_for('admin.edit_article', id=jurnal.id) }}">Edit article</a> ]
+                    <span> {{ jurnal.downloads }} Downloads {{ jurnal.Views }} Views</span>
+                    {% endif %}
+                    {% else %}
+                    [ <a>Abstract</a> ]
+                    [ <a>PDF</a> ]
+                    {% if 'login' in session %}
+                    [ <a href="{{ url_for('admin.delete_article', id=jurnal.id) }}">Delete article</a> ]
+                    [ <a href="{{ url_for('admin.edit_article', id=jurnal.id) }}">Edit article</a> ]
+                    <span> {{ jurnal.downloads }} Downloads {{ jurnal.Views }} Views</span>
+                    {% endif %}
+                    {% endif %}
+
+                </div>
+                {% endfor %}
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if volume.cover_image != '' or volume.photographed != '' %}
+    <div class="pad_jo part2_v">
+        <div class="main_journal_part">
+            <div class="content_item">
+                <div class="main_item-block">
+                    {% if volume.cover_image != '' %}
+		    <p class = "cover_p"><b>Cover image:</b>{{ volume.cover_image }}</p>
+		    {% endif %}
+                    <p class="cover_p2 mar_b-">{{ volume.photographed }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<script>
+    // $('.item p a').on('click', function (e) { e.preventDefault(); })
+    $('.item p > a').on('click', function (e) { e.preventDefault(); })
+</script>
+{% endblock %}

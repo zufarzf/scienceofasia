@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <!-- -------------------------------------- -->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!-- -------------------------------------- -->
+    <meta name="robots" content="">
+    <!-- -------------------------------------- -->
+    <meta name="Author" content="">
+    <meta name="Copyright" content="">
+    <meta name="Address" content="">
+    <!-- -------------------------------------- -->
+    <meta property="og:locale" content="">
+    <meta property="og:type" content="">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="">
+    <!-- -------------------------------------- -->
+    <meta name="twitter:card" content="">
+    <meta name="twitter:site" content="">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+    
+    <link rel="shortcut icon" href="{{ url_for('main.static', filename='favicon/sc_favico.ico') }}" type="image/x-icon">
+
+    <!-- <meta http-equiv="Content-Type" meta content="width=990" name="viewport" id="viewport"> -->
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='js/jquery-3.5.1.min.js') }}">
+    {% block head %}{% endblock head %}
+    <title>{% block title %}{% endblock %}</title>
+    <!-- -------------------------------------------- -->
+    <style>
+        .header_menu {
+            background-image: url("{{ url_for('main.static', filename='images/menu-fon.jpg') }}");
+        }
+
+        .menu ul li {
+            background-image: url("{{ url_for('main.static', filename='images/button.png') }}");
+        }
+
+        .item1_text li {
+            list-style-image: url("{{ url_for('main.static', filename='images/bullet1.jpg') }}");
+        }
+    </style>
+    <!-- -------------------------------------------- -->
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ======================HEADER_PART===================== -->
+
+        <div class="header">
+            <div class="header_top">
+                <img src="{{ url_for('main.static', filename='images/header.png') }}" alt="">
+            </div>
+            <div class="header_bottom">
+                <img src="{{ url_for('main.static', filename='images/under-header.png') }}" alt="">
+                <div class="header_menu">
+                    <p class="p s">|
+                        <a href="{{ url_for('main.home') }}">Home</a>|
+                    </p>
+                    <p class="p">
+                        <a href="{{ url_for('main.about') }}">About ScienceAsia</a>|
+                    </p>
+                    <p class="p">
+                        <a href="{{ url_for('main.public') }}">Publication charge</a>|
+                    </p>
+                    {% block adv %} {% endblock %} {% block man %} {% endblock %}
+                    <p class="p">
+                        <a href="{{ url_for('main.sub') }}">Subscription for printed version</a>|
+                    </p>
+                    <p class="p">
+                        <a href="{{ url_for('main.contact') }}">Contact us</a>
+                    </p>
+                    <p class="p">
+                        {% for validate_class, message in get_flashed_messages(True) %}
+                    <div class="block message-body {{ validate_class }}">
+                        <p class="message">
+                            {{ message }}
+                        </p>
+                    </div>
+                    {% endfor %}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- end of the header part -->
+
+
+        <!-- ======================Article===================== -->
+
+        <div class="article">
+
+            <!-- =================LEFT MENU ============= -->
+
+            <div class="menu">
+                <img src="{{ url_for('main.static', filename='images/lishniy.jpg') }}" alt="">
+                <ul>
+                    <li><a href="{{ url_for('main.edition') }}">Editorial Board</a></li>
+                    <li><a href="{{ url_for('main.journal') }}">Journal Policy</a></li>
+                    <li><a href="{{ url_for('main.instruction') }}">Instructions for Authors</a></li>
+                    <li><a href="{{ url_for('main.submission') }}">Online submission</a></li>
+                    <li><a href="{{ url_for('main.status') }}">MS status & Time frame</a></li>
+                    <li><a href="{{ url_for('main.author') }}">Author Login</a></li>
+                    <li><a href="{{ url_for('main.review') }}">Reviewer Login</a></li>
+                    {% for volume in volumes %}
+                    <li>
+                        <a href="{{ url_for('main.volume_1', id=volume.id) }}">{{ volume.name }}</a>
+                    </li>
+                    {% if 'login' in session %}
+                    <a href="{{ url_for('admin.edit_volume', id=volume.id) }}">Edit</a>
+
+                    {% if categories_chek.filter_by(left_menu=volume.id).first() == None %}
+                    <a href="{{ url_for('admin.delete_volume', id=volume.id) }}">Delete</a>
+                    <div class="margin-div"></div>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                    <li><a href="{{ url_for('main.earlier') }}">Earlier issues</a></li>
+                    <li><a href="{{ url_for('main.supple') }}">Supplementary issue</a></li>
+                    {% if 'login' in session %}
+                    <div class="admin_links">
+                        <a class="admin_link" href="{{ url_for('admin.add_volume') }}">Add volumes</a>
+                        <a class="admin_link" href="{{ url_for('admin.admin_panel') }}">Admin panel</a>
+			<a class="admin_link" href="{{ url_for('admin.exit') }}">Exit</a>
+                    </div>
+                    {% endif %}
+                </ul>
+
+                {% block image %} {% endblock %}
+            </div>
+
+            <!-- ========== end of the left menu ========== -->
+            {% block main %} {% endblock %}
+        </div>
+
+        <div class="footer">
+            <div class="footer-wrapper"><img src="{{ url_for('main.static', filename='images/footer.png') }}" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+<link rel="stylesheet" href="{{ url_for('main.static', filename='js/jquery-3.5.1.min.js') }}">
+{% block script %}{% endblock script %}
+
+</html>

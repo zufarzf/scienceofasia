@@ -1,0 +1,154 @@
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+}
+
+form.admin-login-form,
+form.admin-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fffffffa;
+    box-shadow: 3px 6px 7px #444444;
+    padding: 30px;
+    margin: 20px;
+    transition: 0.3s;
+}
+
+form.admin-login-form h1,
+form.admin-form h1 {
+    color: #414141ea;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+}
+
+
+.admin-login-inp,
+.admin-inp {
+    width: 280px;
+    height: 35px;
+    padding: 0 10px;
+    margin-top: 10px;
+    color: #3a3a3a;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border: 1px solid #4993f39f;
+    background-color: #eaf3fa;
+}
+
+.admin-login-inp {
+    width: 280px;
+    height: 35px;
+}
+
+.admin-inp {
+    width: 800px;
+    height: 35px;
+    outline: none;
+}
+
+.admin-textaria {
+    min-height: 300px;
+    padding: 10px;
+}
+
+.admin-login-submit,
+.admin-submit {
+    background-color: #3c71b6;
+    border: none;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.17s;
+    box-shadow: 2px 2px 3px #444444;
+}
+
+.admin-login-submit:hover {
+    background-color: #345e96;
+}
+
+.admin-login-submit:active {
+    transform: scale(0.99);
+}
+
+.admin-submit:hover {
+    background-color: #345e96;
+}
+
+.admin-submit:active {
+    transform: scale(0.99);
+}
+
+textarea#abstract {
+    min-height: 300px;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px;
+    line-height: 150%;
+}
+
+.admin-buttons-wrapper {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-buttons-wrapper h1 {
+    margin: 5px;
+    color: #364d68;
+    font-size: 28px;
+}
+
+.admin-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: -5px; */
+}
+
+.admin-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 40px; */
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 5px;
+    color: #fff;
+    background-color: #333;
+    transition: 0.2s;
+    box-shadow: 2px 3px 4px #444;
+}
+
+.admin-button:hover {
+    background-color: #474747;
+}
+
+.admin-button:active {
+    box-shadow: 2px 2px 3px #444;
+    transform: scale(0.99);
+}
+
+.admin-delete {
+    background-color: #eb4141;
+}
+
+.admin-delete:hover {
+    background-color: #f74a4a;
+}
+
+.admin-add {
+    background-color: #3473c7;
+}
+
+.admin-add:hover {
+    background-color: #397ed8;
+}

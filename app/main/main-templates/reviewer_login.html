@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %} {%
+block main %}
+<div class="pad_jo">
+    <div class="main_journal_part">
+        <div class="title_image">
+            <img class="image_review" src="{{ url_for('main.static', filename='images/review.jpg') }}" alt="">
+        </div>
+        <div class="table_review_login">
+            <form method="" action="">
+                <table border="1" align="center" cellpadding="5" cellspacing="0" bordercolor="#999999">
+
+                    <tbody>
+                        <tr>
+                            <td bgcolor="#E8F2DF"><span class="style11">Login Name</span></td>
+                            <td bgcolor="#E8F2DF"><input name="user" type="text" id="user" size="10"></td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#E8F2DF"><span class="style11">Password </span></td>
+                            <td bgcolor="#E8F2DF"><input name="pwd" type="text" id="pwd" size="10" maxlength="4"> (4
+                                characters)</td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#F2F8ED">MS Code No</td>
+                            <td bgcolor="#F2F8ED"><input name="msno" type="text" id="msno" size="10" maxlength="9">
+                                (XXXX-XXXX)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#F2F8ED"><span class="style11">Password of MS</span></td>
+                            <td bgcolor="#F2F8ED"><input name="pwdrwms" type="text" id="pwdrwms" size="10"
+                                    maxlength="6"> (6 characters)</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" align="center" bgcolor="#D6D6D6"><input type="submit" name="Submit"
+                                    value="Submit"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <p><strong></strong></p>
+                <center><strong>
+                        <font size="3">If you encounter with login problem either as authors or reviewers </font>
+                    </strong></center>
+                <p></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block adv %}
+<p class="p">
+    <a href="#">Advertise with us</a>|
+</p>{% endblock %} {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/style.css') }}">
+{% endblock head %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block main %}
+
+<div class="admin-buttons-wrapper">
+    <h1>{{ admin.name }}</h1>
+
+    <div class="admin-buttons">
+        <a class="admin-button" href="{{ url_for('admin.admin_edit') }}">Изменить профиль</a>
+        {% if delete %}
+        <a class="admin-button" href="{{ url_for('admin.admin_delete') }}">Удалить профиль</a>
+        {% endif %}
+    </div>
+    <div class="admin-buttons">
+        <a class="admin-button admin-add" href="{{ url_for('admin.admin_add') }}">Добавить админа</a>
+    </div>
+</div>
+
+{% endblock %}

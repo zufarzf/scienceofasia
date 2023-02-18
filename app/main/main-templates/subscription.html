@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %} {%
+block main %}
+
+<div class="pad_jo">
+    <div class="main_journal_part sub_main">
+        <div class="journal_image sub_title-img">
+            <img src="{{ url_for('main.static', filename='images/subscription.jpg') }}" alt="">
+        </div>
+        <div class="main_links_sub">
+            <ul class="ul_subsc">
+                <li><a href="#">Electronic subscription</a></li>
+                <li>
+                    <a href="#">Download subscription form</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

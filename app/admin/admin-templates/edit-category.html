@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/style.css') }}">
+{% endblock head %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block main %}
+<div class="form-wrapper">
+    <form class="admin-form" action="{{ url_for('admin.edit_category', id=id) }}" method="post">
+        <!-- ---------------------------------------------- -->
+        <h1>Edit Category</h1>
+        <!-- ---------------------------------------------- -->
+
+        {{ form.hidden_tag() }}
+        <!-- ---------------------------------------------- -->
+
+        {% for validate_class, message in get_flashed_messages(True) %}
+        <div class="block message-body {{ validate_class }}">
+            <p class="message">
+                {{ message }}
+            </p>
+        </div>
+        {% endfor %}
+
+        {% for field_name in form.errors %}
+        {% for error in form.errors[field_name] %}
+        <div class="block message-body invalide-message">
+            <p class="message">{{ error }}</p>
+        </div>
+        {% endfor %}
+        {% endfor %}
+
+        <!-- ---------------------------------------------- -->
+        {{ form.name(class='admin-inp', placeholder="Title", value=category.name) }}
+        {{ form.submit(class='admin-inp admin-submit') }}
+    </form>
+</div>
+
+
+{% endblock %}

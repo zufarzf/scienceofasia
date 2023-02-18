@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %}
+
+{% block main %}
+
+<div class="pad_jo about_page_main">
+    <div class="main_journal_part">
+        <div class="journal_image about">
+            <img src="{{ url_for('main.static', filename='images/about_scienceasia.jpg') }}" alt="">
+        </div>
+        <div class="about_date">Updated: April 1, 2019</div>
+        <div class="about_text">
+            <p><em><b class="about_b">ScienceAsia</b></em> is an international journal published bimonthly by the
+                Science Society of Thailand under Royal Patronage and the National Research Council of Thailand. The
+                journal was established in 1975 as "Journal
+                of the Science Society of Thailand, JSST" to serve the interests of the research-oriented and
+                professional Thai researchers as well as to publish original research work done primarily in the
+                country. The journal was renamed "ScienceAsia"
+                in 1999 in order to broaden its coverage and attract contribution from international community. The
+                National Research Council of Thailand (NRCT) has joined the journal as co-owner since 2011.</p> <br>
+
+
+            <p><em><b class="about_b">ScienceAsia</b></em> ScienceAsia publishes original research articles and full or
+                mini review articles in science and mathematics. Research articles must include scientifically useful
+                data or observations, and/or provide
+                a new scientific concept or a new explanation of published results. In addition, articles of a more
+                applied nature or articles whose contents are in current scientific interest may also be submitted for
+                consideration if there is sufficient
+                scientific merit. Currently, the journal is available as hard copy by subscription (see <a
+                    href="#">Subscription</a> ), and online at <a href="#">https://www.scienceofasia.org</a></p>
+            <br>
+
+
+            <p><em><b class="about_b">ScienceAsia</b></em>is indexed in various international databases, such as Science
+                Citation Index (SCI) Expanded, Scopus, and CAPlus. The journal fulfills the criteria established by
+                Thailand funding agencies, for an
+                international journal published in Thailand. Throughout the years, ScienceAsia was supported by the
+                Thailand Research Fund, the Knowledge Network Institute of Thailand, the Office of the Higher Education
+                Commission, NRCT, and the Foundation
+                for the Promotion of Science and Technology under Royal Patronage. At present, it has been partially
+                funded by NRCT since 2011. The journal is currently widely accepted by international research community
+                with increasing numbers of submitted
+                manuscripts from overseas.</p> <br>
+
+            <p>See the <a href="{{ url_for('main.instruction') }}">Instructions for
+                    Authors</a> for the preparation of manuscript to be
+                submitted to ScienceAsia.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

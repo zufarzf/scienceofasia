@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/style.css') }}">
+{% endblock head %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block main %}
+<div class="form-wrapper">
+    <form class="admin-form" action="{{ url_for('admin.add_article', id=id) }}" method="post"
+        enctype="multipart/form-data">
+        <h1>Add Article</h1>
+        {{ form.hidden_tag() }}
+        <label for="valid_articles"><b>Рабочая:</b> {{ form.valid_articles() }}</label>
+        <!-- ---------------------------------------------- -->
+
+        {% for validate_class, message in get_flashed_messages(True) %}
+        <div class="block message-body {{ validate_class }}">
+            <p class="message">
+                {{ message }}
+            </p>
+        </div>
+        {% endfor %}
+
+        {% for field_name in form.errors %}
+        {% for error in form.errors[field_name] %}
+        <div class="block message-body invalide-message">
+            <p class="message">{{ error }}</p>
+        </div>
+        {% endfor %}
+        {% endfor %}
+
+        <!-- ---------------------------------------------- -->
+        <label for=""><b>Name:</b> {{ form.name(id="name") }}</label>
+        --------------------------------------------------------------------------------------------
+        {{ form.authors(class='admin-inp', placeholder="Authors") }}
+        --------------------------------------------------------------------------------------------
+
+        <label for=""><b>Authors:</b> {{ form.authors_p(id="authors_p")}}</label>
+        --------------------------------------------------------------------------------------------
+        {{ form.abstract(class="admin-inp", placeholder="Abstract") }}
+        --------------------------------------------------------------------------------------------
+        {{ form.pdf_file() }}
+        --------------------------------------------------------------------------------------------
+
+        <label for=""><b>doi:</b> {{ form.doi_text(id="doi_text")}}</label>
+        --------------------------------------------------------------------------------------------
+
+        {{ form.downloads(class='admin-inp', placeholder="Downloads")}}
+        {{ form.views(class='admin-inp', placeholder="Views")}}
+        --------------------------------------------------------------------------------------------
+
+        <label for=""><b>Sub text</b>: {{ form.sub_text(id="sub_list")}}</label>
+        --------------------------------------------------------------------------------------------
+        {{ form.author_email(class='admin-inp', placeholder="Author email")}}
+        {{ form.received_date(class='admin-inp', placeholder="Received date")}}
+        {{ form.accepted_date(class='admin-inp', placeholder="Accepted date")}}
+        {{ form.enter(class='admin-inp admin-submit') }}
+    </form>
+    {{ ckeditor.load(pkg_type="full-all") }}
+    {{ ckeditor.config(name='name', height=100, width=800) }}
+    {{ ckeditor.config(name='authors_p', height=100, width=800) }}
+    {{ ckeditor.config(name='doi_text', height=100, width=800) }}
+    {{ ckeditor.config(name='sub_list', height=100, width=800) }}
+</div>
+
+
+{% endblock %}

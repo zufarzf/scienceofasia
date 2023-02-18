@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %}
+
+{% block main %}
+
+{% block adv %}
+<p class="p">
+    <a href="#">Advertise with us</a>|
+</p>{% endblock %}
+
+<div class="pad_ed">
+    <div class="main_part_of_edition">
+
+        <div class="edition_image er">
+            <img src="{{ url_for('main.static', filename='images/supplement_issueN.jpg') }}" alt="">
+        </div>
+
+        <div class="years_main">
+            <div class="years_supple">
+                {% for i in range(2013, 2023) %}
+                <a href="#">{{i}}</a> {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

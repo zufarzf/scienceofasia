@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %} {%
+block main %}
+
+<div class="pad_jo">
+    <div class="main_journal_part sub_main">
+        <div class="journal_image sub_title-img">
+            <img src="{{ url_for('main.static', filename='images/contactus.jpg') }}" alt="">
+        </div>
+        <div class="contacts_text" align="center">
+            <b>Emeritus Professor Piamsook Pongsawasdi</b><br>
+            <br>
+            <em>EDITORIAL OFFICE</em>: <br> c/o Science Society of Thailand, Faculty of Science, Chulalongkorn
+            University<br> PhyaThai Road, Patumwan, Bangkok 10330, Thailand<br> 
+	    <a href="{{ url_for('main.home') }}"> scienceofasia.org </a><br>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

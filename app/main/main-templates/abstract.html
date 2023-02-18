@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %} ScienceAsia - Journal of The Science Society of Thailand {% endblock %}
+
+{% block main %}
+
+<div class="pad_abs">
+    <div class="links_of_valume">
+        <div class="link_prev">
+            <img src="{{ url_for('main.static', filename='images/back.png') }}" alt="<">
+            <a href="next_article">
+                Volume 48S Number 1
+            </a>
+        </div>
+        <div class="link_prev center_link_v">
+            <img src="{{ url_for('main.static', filename='images/back.png') }}" alt="<">
+            <a href="next_article">
+                Volume 48S Number 2
+            </a>
+        </div>
+        <div class="link_prev prev_article">
+            <a href="next_article">
+                Volume 48S Number 2
+            </a>
+            <img class="row-cl" src="{{ url_for('main.static', filename='images/back.png') }}" alt=">">
+        </div>
+    </div>
+    <div class="prev-next">
+        <div class="previous">
+            <img src="{{ url_for('main.static', filename='images/back_red.png') }}" alt="<">
+            <a href="{{ url_for('main.abstract', id=article.id) }}">previous article</a>
+        </div>
+        <div class="next">
+            <a href="{{ url_for('main.abstract', id=article.id) }}">next article</a>
+            <img src="{{ url_for('main.static', filename='images/back_red.png') }}" alt=">">
+        </div>
+    </div>
+    <div class="kere">
+        <b>Research articles</b>
+        <hr noshade="" color="#EBEBEB">
+    </div>
+    <div class="mayda">
+        <p>{{ article.doi_text | safe }}</p>
+    </div>
+    <h1 class="abs_title">{{ article.title | safe }}</h1>
+    <h2>{{ article.authors_sup | safe }}</h2>
+    <p align="justify" class="pshnik">&nbsp;<br>
+        <strong>ABSTRACT</strong>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ article.abstract }}
+    </p>
+
+    <div class="ortiqcha">
+        <div class="or2">
+            {% if article.pdf_url == 'FalseNone' %}
+            <a href="#" class="ashnik">Download PDF</a><br><br>
+            {% else %}
+            <a href="{{ url_for('main.static', filename='upload_files/'+article.pdf_url) }}" class="ashnik">Download
+                PDF</a><br><br>
+            {% endif %}
+            <div class="text_under_a">
+                {{ article.downloads }} <b>Downloads</b> {{ article.Views }} <b>Views</b>
+            </div>
+        </div>
+    </div>
+    <hr noshade="" color="#EBEBEB">
+    <div class="abs_ul">{{ article.sub_text | safe }}</div>
+
+    <p class="one_of_the_p">* Corresponding author, E-mail: <a href="#">{{ article.author_email }}</a></p>
+    <p class="one_of_the_p2">Received {{ article.received_date }}, Accepted {{ article.accepted_date }}</p>
+</div>
+
+{% endblock %}
