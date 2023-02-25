@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/style.css') }}">
+{% endblock head %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block main %}
+<div class="form-wrapper">
+
+    <form class="admin-form" action="{{ form_action }}" method="post" enctype="multipart/form-data">
+        <h1>{{ page_title }}</h1>
+        {% for validate_class, message in get_flashed_messages(True) %}
+        <div class="block message-body {{ validate_class }}">
+            <p class="message">
+                {{ message }}
+            </p>
+        </div>
+        {% endfor %}
+
+        {% for field_name in form.errors %}
+        {% for error in form.errors[field_name] %}
+        <div class="block message-body invalide-message">
+            <p class="message">{{ error }}</p>
+        </div>
+        {% endfor %}
+        {% endfor %}
+        {{ form.hidden_tag() }}
+        {{ form.image() }}
+        {{ form.text(class='admin-inp', placeholder="text") }}
+        {{ form.link(class='admin-inp', placeholder="link") }}
+        {{ form.enter(class='admin-inp admin-submit') }}
+        <a class="go_back" href="{{ url_for('main.home') }}">go back</a>
+        <style>
+            input {
+                margin: 20px 0;
+            }
+
+            a.go_back {
+                margin: 10px;
+                color: #306699;
+                font-size: 18px;
+            }
+
+            a.go_back:hover {
+                color: #309976;
+            }
+        </style>
+    </form>
+
+</div>
+
+
+{% endblock %}
+{% block image %}
+
+<div class="numbers">
+    {% for number in numbers %}
+    <img src="{{ url_for('main.static', filename='images/numbers/'+number.image) }}" alt="">
+    {% endfor %}
+</div>
+
+{% endblock %}

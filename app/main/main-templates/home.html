@@ -1,5 +1,7 @@
-{% extends 'base.html' %} {% block title %}ScienceAsia - Journal of The Science Society of Thailand{% endblock %} {%
-block main %}
+{% extends 'base.html' %}
+{% block title %}ScienceAsia - Journal of The Science Society of Thailand{% endblock %}
+
+{% block main %}
 <div class="main_part">
     <div class="central_part">
 
@@ -35,67 +37,53 @@ block main %}
                     <h4>IMPORTANT NOTICE</h4>
                 </div>
                 <marquee>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>
-                        <font color="red">***ScienceAsia has started the online published ahead of print from the issue
-                            48(3), 2022 onwards. *** </font> ::
-                        Authors please consult the Instructions for Authors updated on May 1, 2021 before preparing your
-                        manuscript. Use of manuscript template is recommended.
+                        <font color="red">{{ data.line_text_first }}</font> ::
+                        {{ data.line_text_last }}
                     </b>
                 </marquee>
+                {% if 'login' in session %}
+                <div class="admin_links">
+                    <a style="margin: 7px;" class="admin_link admin_link_tool"
+                        href="{{ url_for('admin.main_data') }}">Edit main</a>
+                </div>
+                {% endif %}
             </div>
             <div class="main_items">
                 <div class="item_title1 spec_title">
                     <h4>CURRENT REGULAR ISSUE</h4>
                 </div>
                 <div class="item1_image">
-                    <a href="{{ url_for('main.static', filename='images/item1.jpg') }}">
-                        <img class="spimg" src="{{ url_for('main.static', filename='images/item1.jpg') }}" alt="">
+                    <a href="{{ url_for('main.static', filename='images/main_data/'+data.volume_image) }}">
+                        <img class="spimg"
+                            src="{{ url_for('main.static', filename='images/main_data/'+data.volume_image) }}" alt="">
                     </a>
                     <div class="item1_text">
                         <div class="title_part1">
-                            <p class="text">Volume 48 Number 6 (December 2022)</p>
+                            <p class="text">{{ data.volume_name }}</p>
                             <p class="text"><a href="#">Table of Contents</a></p>
                             <p class="text"><a href="#">Subscribe to ScienceAsia</a>(printed version)
                             </p>
                         </div>
                         <div class="ul">
+                            {% for i in value_list_1 %}
                             <div class="ul_item">
                                 <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
-                                <a href="#">Symbiotic microbiota as a potent immunomodulator for human host</a><br>
+                                <a href="#">{{ i.name }}</a><br>
+                                {% if 'login' in session %}
+                                <a class="v_l_1 v_l_1-edit"
+                                    href="{{ url_for('admin.edit_main_catalog', id=i.id) }}">Edit</a>
+                                <a class="v_l_1" href="{{ url_for('admin.delete_main_catalog', id=i.id) }}">Delete</a>
+                                {% endif %}
                             </div>
+                            {% endfor %}
+                            {% if 'login' in session %}
+                            <div class="admin_links">
+                                <a class="admin_link admin_link_tool" href="{{ url_for('admin.add_main_catalog') }}">Add
+                                    new
+                                    bar</a>
+                            </div>
+                            {% endif %}
 
-                            <div class="ul_item">
-                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
-                                <a href="#">TRAIL-induced apoptosis combined with diosgenin: A novel gastric cancer
-                                    treatment</a><br>
-                            </div>
-
-                            <div class="ul_item">
-                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
-                                <a href="#">Anabolic effect of Kwao Khruea Daeng in orchidectomized rats</a><br>
-                            </div>
-
-                            <div class="ul_item">
-                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
-                                <a href="#">Proliferation of high glucose induced trophoblast cells treated with
-                                    dexmedetomidine</a><br>
-                            </div>
-
-                            <div class="ul_item">
-                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
-                                <a href="#">Lipoyl-substituted porphyrins as novel biocompatible mitochondria-targeting
-                                    agents</a><br>
-                            </div>
-
-                            <div class="ul_item">
-                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
-                                <a href="#">Adsorption of alizarin yellow and rhodamine B dyes on water hyacinth
-                                    leaves</a><br>
-                            </div>
-
-                            <div class="ul_item">
-                                <img src="{{ url_for('main.static', filename='images/bullet1.jpg') }}" alt="">
-                                <a href="#">The periodicity on a transcendental entire function</a><br>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,63 +93,105 @@ block main %}
                     <div class="spec_title fir">
                         <h4>RECENT SUPPLEMENT/SPECIAL ISSUE</h4>
                     </div>
+                    {% if 'login' in session %}
+                    <div class="admin_links">
+                        <a class="admin_link admin_link_tool" href="{{ url_for('admin.add_recent_supplement') }}">Add
+                            new bar</a>
+                    </div>
+                    {% endif %}
+                    {% for i in recent_supplement %}
                     <div class="first_i1">
-                        <img src="{{ url_for('main.static', filename='images/item2.jpg') }}" alt="">
+                        <img src="{{ url_for('main.static', filename='images/recent_supplement/'+i.image) }}" alt="">
                         <div class="f_i_t">
-                            <p>Volume 47S Number 1 (July 2021)</p>
-                            <a href="#">Table of Contents</a>
+                            <p>{{ i.text }}</p>
+                            <a href="#">{{ i.link }}</a>
                         </div>
                     </div>
-                    <div class="first_i1">
-                        <img src="{{ url_for('main.static', filename='images/item3.jpg') }}" alt="">
-                        <div class="f_i_t">
-                            <p>Volume 48S Number 1 (February 2022) </p>
-                            <a href="#">Table of Contents</a>
-                        </div>
+                    {% if 'login' in session %}
+                    <div style="margin: 7px;" class="v_l_1-wrapper">
+                        <a class="v_l_1 v_l_1-edit"
+                            href="{{ url_for('admin.edit_recent_supplement', id=i.id) }}">Edit</a>
+                        <a class="v_l_1" href="{{ url_for('admin.delete_recent_supplement', id=i.id) }}">Delete</a>
                     </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
                 <div class="second_i">
                     <div class="spec_title sec">
                         <h4> ISSUES IN PROGRESS</h4>
                     </div>
                     <div class="items_block2">
-                        <p class="spp">In progress issues contain online articles which are citable using their doi
-                            numbers.</p>
-                        <div class="dif">
-                            <p>Volume 49 Issue 1 (February 2023)</p>
-                            <a href="#">Table of Contents</a>
+                        <p class="spp">{{ data.issues_in_prog }}</p>
+                        {% if 'login' in session %}
+                        <div class="admin_links">
+                            <a style="margin: 17px;" class="admin_link admin_link_tool"
+                                href="{{ url_for('admin.add_issues_progress') }}">Add
+                                new bar</a>
                         </div>
+                        {% endif %}
+                        {% for i in issues_progress %}
                         <div class="dif">
-                            <p>Volume 49 Issue 2 (April 2023)</p>
-                            <a href="#">
-                                Table of Contents
-                            </a>
+                            <p>{{ i.text }}</p>
+                            <a href="#">{{ i.link }}</a>
                         </div>
+                        {% if 'login' in session %}
+                        <a class="v_l_1 v_l_1-edit" href="{{ url_for('admin.edit_issues_progress', id=i.id) }}">Edit</a>
+                        <a class="v_l_1" href="{{ url_for('admin.delete_issues_progress', id=i.id) }}">Delete</a>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <style>
+        a.v_l_1 {
+            color: #ce3b54;
+            font-weight: 500;
+            margin: 5px 5px 10px 5px;
+        }
 
+        a.v_l_1-edit {
+            color: #38754d;
+        }
+
+        a.admin_link_tool:hover {
+            color: #fff
+        }
+    </style>
     <!-- ================end of the search part=============== -->
 
     <div class="right_part">
-        <img src="{{ url_for('main.static', filename='images/right1.png') }}" alt="" class="first_image"><br>
-        <img src="{{ url_for('main.static', filename='images/right2.jpg') }}" alt="" class="second">
-        <p class="right_text">The Impact Factor for 2020 = 0.615</p>
+        <img src="{{ url_for('main.static', filename='images/right_bar/'+right_bar.image_1) }}" alt=""
+            class="first_image"><br>
+        <img src="{{ url_for('main.static', filename='images/right_bar/'+right_bar.image_2) }}" alt="" class="second">
+        <p class="right_text">{{ right_bar.text_1 }}</p>
         <a href="#" class="right_link">
-            Web Usage Statistics
+            {{ right_bar.text_2 }}
         </a>
         <div class="accept">
             <h4>
-                ACCEPTED ARTICLES
+                {{ right_bar.text_3 }}
             </h4>
-            <a href="#">Table of Contents</a>
+            <a href="#">{{ right_bar.text_4 }}</a>
             <p>
-                Accepted articles are corrected proof articles in which final details need to be futher assigned.
+                {{ right_bar.text_5 }}
             </p>
         </div>
+        {% if 'login' in session %}
+        <div class="admin_links">
+            <a class="admin_link admin_link_tool" href="{{ url_for('admin.right_bar') }}">Edit right bar</a>
+        </div>
+        {% endif %}
     </div>
 </div>
-{% endblock %} {% block image %}
-<img class="numbers" src="{{ url_for('main.static', filename='images/left-bar-number.png') }}" alt=""> {% endblock %}
+{% endblock %}
+{% block image %}
+
+<div class="numbers">
+    {% for number in numbers %}
+    <img src="{{ url_for('main.static', filename='images/numbers/'+number.image) }}" alt="">
+    {% endfor %}
+</div>
+
+{% endblock %}

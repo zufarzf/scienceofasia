@@ -41,7 +41,7 @@ block main %}
                 <p class="title_of_part">
                     {{ category.name }}
                     {% if 'login' in session %}
-                    {% if jurnals.filter_by(menu_id=category.id).first() == None %}
+                    {% if jurnals_cheked.filter_by(menu_id=category.id).first() == None %}
                     <a class="category_button" href="{{ url_for('admin.delete_category', id=category.id) }}">Delete
                         category</a>
                     {% endif %}
@@ -53,7 +53,9 @@ block main %}
                 {% endif %}
                 </p>
 
-                {% for jurnal in jurnals.filter_by(menu_id=category.id).all() %}
+                {% for list_jurnal in jurnals %}
+                {% if list_jurnal[0] == category.id %}
+                {% for jurnal in list_jurnal[-1] %}
                 <div class="item">
                     <b>{{ jurnal.title | safe }}</b>
                     <em>{{ jurnal.authors}}</em><br>
@@ -67,7 +69,7 @@ block main %}
                     [ <a href="#">PDF</a> ]
                     {% else %}
                     [ <a href="{{ url_for('main.abstract', id=jurnal.id) }}">PDF</a> ]
-                    {% endif %}                    
+                    {% endif %}
 
 
                     {% if 'login' in session %}
@@ -87,6 +89,8 @@ block main %}
 
                 </div>
                 {% endfor %}
+                {% endif %}
+                {% endfor %}
 
             </div>
             {% endfor %}
@@ -98,8 +102,8 @@ block main %}
             <div class="content_item">
                 <div class="main_item-block">
                     {% if volume.cover_image != '' %}
-		    <p class = "cover_p"><b>Cover image:</b>{{ volume.cover_image }}</p>
-		    {% endif %}
+                    <p class="cover_p"><b>Cover image:</b>{{ volume.cover_image }}</p>
+                    {% endif %}
                     <p class="cover_p2 mar_b-">{{ volume.photographed }}</p>
                 </div>
             </div>

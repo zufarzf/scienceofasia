@@ -108,8 +108,12 @@ input {
 }
 
 .menu .numbers {
-    margin-top: 35px;
-    margin-left: 40px;
+    /* margin-top: 35px;
+    margin-left: 40px; */
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -129,6 +133,7 @@ input {
 
 .central_part {
     margin-right: 10px;
+    flex: 1;
 }
 
 .border_class {
@@ -196,6 +201,9 @@ input {
 
 .first_image {
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .second {
@@ -342,13 +350,19 @@ input {
 
 .second_i {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .first_i {
-    width: 33.2402%;
-    min-width: 326px;
+    width: 68%;
+    min-width: 332px;
     margin-right: 15px;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .first_i1 img {
@@ -365,6 +379,7 @@ input {
 .first_i1 {
     display: flex;
     align-items: center;
+    width: 345px;
 }
 
 .f_i_t {
@@ -380,6 +395,7 @@ input {
 .spp {
     font-size: 10pt;
     margin-bottom: 20px;
+    width: fit-content;
 }
 
 .dif p {
@@ -808,12 +824,16 @@ input {
     margin-top: -30px;
 }
 
-.main_item-block{
+.main_item-block {
     height: 60px;
 }
 
 @media (max-width: 480px) {
-  .cover_p, .cover_p2 {font-size: 8px !important;}
+
+    .cover_p,
+    .cover_p2 {
+        font-size: 8px !important;
+    }
 }
 
 
@@ -1103,8 +1123,8 @@ input {
 }
 
 .admin_link {
-    color: #225788;
-    border: 2px solid #225788;
+    color: #306699;
+    border: 2px solid #306699;
     padding: 10px;
     margin: 5px 0 0 0;
     font-family: sans-serif;
@@ -1117,6 +1137,8 @@ input {
     z-index: 1;
 }
 
+
+
 .admin_link:hover {
     color: #fff;
 }
@@ -1126,13 +1148,40 @@ input {
     display: block;
     width: 100%;
     height: 100%;
-    background-color: #225788;
+    background-color: #306699;
     position: absolute;
     top: 0;
     left: 0;
     transform: translateX(-100%);
     transition: 0.5s;
     z-index: -1;
+}
+
+.admin_link_tool {
+    color: #7c5b1e;
+    border: 2px solid #7c5b1e;
+}
+
+.admin_link_tool::after {
+    background-color: #7c5b1e;
+}
+
+.admin_link_admin {
+    color: #1c804e;
+    border: 2px solid #1c804e;
+}
+
+.admin_link_admin::after {
+    background-color: #1c804e;
+}
+
+.admin_link_exit {
+    color: #da3e0f;
+    border: 2px solid #da3e0f;
+}
+
+.admin_link_exit::after {
+    background-color: #da3e0f;
 }
 
 .admin_link:hover:after {

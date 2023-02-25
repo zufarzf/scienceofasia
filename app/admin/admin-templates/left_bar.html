@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/style.css') }}">
+{% endblock head %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block main %}
+<div class="form-wrapper">
+    {% for validate_class, message in get_flashed_messages(True) %}
+    <div class="block message-body {{ validate_class }}">
+        <p class="message">
+            {{ message }}
+        </p>
+    </div>
+    {% endfor %}
+
+    <div class="edit_numbers_container">
+        {% for number in numbers %}
+        <div class="number_item-wrapper">
+            <a href="{{ url_for('admin.left_bar_edit', id=number.id) }}" class="number_item-link">
+                <img class="number_item" src="{{ url_for('main.static', filename='images/numbers/'+number.image) }}"
+                    alt="">
+            </a>
+            <a href="{{ url_for('admin.left_bar_delete', id=number.id) }}" class="number_item-delete">Delete</a>
+        </div>
+        {% endfor %}
+        <div class="number_item-wrapper">
+            <a href="{{ url_for('admin.left_bar_add') }}" class="number_item-link">
+                <img class="number_item" src="{{ url_for('main.static', filename='images/numbers/icon/add.png') }}"
+                    alt="">
+            </a>
+        </div>
+        <style>
+            .form-wrapper {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .edit_numbers_container {
+                display: flex;
+            }
+
+            .number_item-wrapper {
+                margin: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .number_item {
+                height: 50px;
+            }
+
+            .number_item-delete {
+                margin-top: 15px;
+                font-weight: 600;
+                color: #ce3b54;
+            }
+        </style>
+    </div>
+
+</div>
+
+
+{% endblock %}
+{% block image %}
+
+<div class="numbers">
+    {% for number in numbers %}
+    <img src="{{ url_for('main.static', filename='images/numbers/'+number.image) }}" alt="">
+    {% endfor %}
+</div>
+
+{% endblock %}

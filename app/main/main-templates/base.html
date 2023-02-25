@@ -29,7 +29,7 @@
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
-    
+
     <link rel="shortcut icon" href="{{ url_for('main.static', filename='favicon/sc_favico.ico') }}" type="image/x-icon">
 
     <!-- <meta http-equiv="Content-Type" meta content="width=990" name="viewport" id="viewport"> -->
@@ -87,7 +87,7 @@
                     <p class="p">
                         {% for validate_class, message in get_flashed_messages(True) %}
                     <div class="block message-body {{ validate_class }}">
-                        <p class="message">
+                        <p class="message" style="color: #fff;">
                             {{ message }}
                         </p>
                     </div>
@@ -122,10 +122,12 @@
                         <a href="{{ url_for('main.volume_1', id=volume.id) }}">{{ volume.name }}</a>
                     </li>
                     {% if 'login' in session %}
-                    <a href="{{ url_for('admin.edit_volume', id=volume.id) }}">Edit</a>
+                    <a style="color: #38754d; font-weight: 500; margin: 0 20px 0 10px;"
+                        href="{{ url_for('admin.edit_volume', id=volume.id) }}">Edit</a>
 
                     {% if categories_chek.filter_by(left_menu=volume.id).first() == None %}
-                    <a href="{{ url_for('admin.delete_volume', id=volume.id) }}">Delete</a>
+                    <a style="color: #ce3b54; font-weight: 500;"
+                        href="{{ url_for('admin.delete_volume', id=volume.id) }}">Delete</a>
                     <div class="margin-div"></div>
                     {% endif %}
                     {% endif %}
@@ -136,8 +138,9 @@
                     {% if 'login' in session %}
                     <div class="admin_links">
                         <a class="admin_link" href="{{ url_for('admin.add_volume') }}">Add volumes</a>
-                        <a class="admin_link" href="{{ url_for('admin.admin_panel') }}">Admin panel</a>
-			<a class="admin_link" href="{{ url_for('admin.exit') }}">Exit</a>
+                        <a class="admin_link admin_link_tool" href="{{ url_for('admin.left_bar') }}">Edit numbers</a>
+                        <a class="admin_link admin_link_admin" href="{{ url_for('admin.admin_panel') }}">Admin panel</a>
+                        <a class="admin_link admin_link_exit" href="{{ url_for('admin.exit') }}">Exit</a>
                     </div>
                     {% endif %}
                 </ul>

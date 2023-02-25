@@ -5,12 +5,12 @@ class Config:
 
 
 class DevConfig(Config):
-    #DEBUG = True
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:##m+k6pXA8*MWh#^@localhost/casia'
 
 
 class ProdConfig(Config):
-    #DEBUG = True
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:##m+k6pXA8*MWh#^@localhost/casia'
 
 

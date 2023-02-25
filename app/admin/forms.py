@@ -79,3 +79,49 @@ class ArticlesForm(FlaskForm):
     enter = SubmitField('Save')
 
 
+class LeftBarForm(FlaskForm):
+    image = FileField()
+    enter = SubmitField('Save')
+
+
+
+class RightBarForm(FlaskForm):
+    image_1 = FileField()
+    image_2 = FileField()
+    text_1 = StringField()
+    text_2 = StringField()
+    text_3 = StringField()
+    text_4 = StringField()
+    text_5 = TextAreaField()
+    enter = SubmitField('Save')
+
+
+
+class MainDataForm(FlaskForm):
+    line_text_first = TextAreaField()
+    line_text_last = TextAreaField()
+    volume_image = FileField()
+    volume_name = StringField()
+    issues_in_prog = TextAreaField()
+    enter = SubmitField('Save')
+
+
+
+class MainCatalogsForm(FlaskForm):
+    name = StringField()
+    enter = SubmitField('Save')
+
+
+
+
+class RecentSupplementForm(FlaskForm):
+    image = FileField()
+    text = StringField()
+    link = StringField()
+    enter = SubmitField('Save')
+
+
+class IssuesProgressForm(FlaskForm):
+    text = StringField()
+    link = StringField()
+    enter = SubmitField('Save')
