@@ -37,7 +37,7 @@
                     <h4>IMPORTANT NOTICE</h4>
                 </div>
                 <marquee>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>
-                        <font color="red">{{ data.line_text_first }}</font> ::
+                        <font color="red">{{ data.line_text_first }}</font>
                         {{ data.line_text_last }}
                     </b>
                 </marquee>
@@ -79,8 +79,7 @@
                             {% if 'login' in session %}
                             <div class="admin_links">
                                 <a class="admin_link admin_link_tool" href="{{ url_for('admin.add_main_catalog') }}">Add
-                                    new
-                                    bar</a>
+                                    main catalog</a>
                             </div>
                             {% endif %}
 
@@ -96,7 +95,7 @@
                     {% if 'login' in session %}
                     <div class="admin_links">
                         <a class="admin_link admin_link_tool" href="{{ url_for('admin.add_recent_supplement') }}">Add
-                            new bar</a>
+                            recent supplement</a>
                     </div>
                     {% endif %}
                     {% for i in recent_supplement %}
@@ -125,8 +124,7 @@
                         {% if 'login' in session %}
                         <div class="admin_links">
                             <a style="margin: 17px;" class="admin_link admin_link_tool"
-                                href="{{ url_for('admin.add_issues_progress') }}">Add
-                                new bar</a>
+                                href="{{ url_for('admin.add_issues_progress') }}">Add issues progress</a>
                         </div>
                         {% endif %}
                         {% for i in issues_progress %}
