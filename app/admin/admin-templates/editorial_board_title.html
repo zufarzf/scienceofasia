@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/style.css') }}">
+{% endblock head %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block main %}
+<div class="form-wrapper">
+    <form id="form" class="admin-login-form" action="" method="post">
+        <h1>{{ form_name }}</h1>
+        {{ form.hidden_tag() }}
+        <!-- ---------------------------------------------- -->
+
+        {% for validate_class, message in get_flashed_messages(True) %}
+        <div class="block message-body {{ validate_class }}">
+            <p class="message">
+                {{ message }}
+            </p>
+        </div>
+        {% endfor %}
+
+        {% for field_name in form.errors %}
+        {% for error in form.errors[field_name] %}
+        <div class="block message-body invalide-message">
+            <p class="message">{{ error }}</p>
+        </div>
+        {% endfor %}
+        {% endfor %}
+
+        <!-- ---------------------------------------------- -->
+        {{ form.title_name(class='admin-login-inp', id="input", placeholder="Title") }}
+        {% if handler_type == 1 %}
+        <input id="addBtn" class='admin-login-inp admin-login-submit' type="submit" value="Add">
+        <input id="addMoreBtn" class='admin-login-inp admin-login-submit' type="submit" value="Add More">
+        {% elif handler_type == 0 %}
+        <input id="addBtn" class='admin-login-inp admin-login-submit' type="submit" value="Save">
+        {% endif %}
+        <a class='form_btn admin-login-inp admin-login-submit' href="{{ url_for('main.edition') }}">Назад</a>
+
+    </form>
+
+</div>
+
+<script>
+
+    // Находим элемент по его id
+
+    var action = "{{ url_for(func, col = col, handler_type = handler_type, id=id, add_type = 'None') }}";
+
+
+    // Находим форму по её id
+    var form = document.getElementById("form");
+
+
+    // Добавляем обработчик события submit
+    form.addEventListener("submit", function (event) {
+        // Отменяем действие по умолчанию (отправку формы)
+        event.preventDefault();
+    });
+
+
+    // Добавляем обработчик события клика
+    form.addEventListener("click", function (event) {
+        // Этот код будет выполнен при клике на элемент с id "myButton"
+
+        if (event.target.id === "addBtn") {
+            action_result = action.replace(/None$/, "addBtn");
+            form.action = action_result;
+
+            var inp = document.getElementById('input')
+            var inp_trim = inp.value.trim();
+            console.log(inp)
+            console.log(inp_trim)
+            if (inp_trim !== '') {
+                form.submit();
+            }
+        }
+
+        else if (event.target.id === "addMoreBtn") {
+            action_result = action.replace(/None$/, "addMoreBtn");
+            form.action = action_result;
+
+            var inp = document.getElementById('input')
+            var inp_trim = inp.value.trim();
+            console.log(inp)
+            console.log(inp_trim)
+            if (inp_trim !== '') {
+                form.submit();
+            }
+        }
+    });
+
+</script>
+
+<style>
+    a.form_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(207, 171, 7);
+        margin-top: 10%;
+    }
+
+    a.form_btn:hover {
+        background-color: rgb(167, 137, 6);
+    }
+
+
+    .admin-login-submit {
+        cursor: pointer;
+    }
+</style>
+{% endblock %}

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, SubmitField, FileField, BooleanField
+from wtforms import StringField, PasswordField, TextAreaField, SubmitField, FileField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, EqualTo
 from flask_ckeditor import CKEditorField
 
@@ -125,3 +125,13 @@ class IssuesProgressForm(FlaskForm):
     text = StringField()
     link = StringField()
     enter = SubmitField('Save')
+
+
+
+
+class EditorialBoardTitleForm(FlaskForm):
+    title_name = StringField(validators=[DataRequired(message=default_message)])
+
+class EditorialBoardItemsForm(FlaskForm):
+    title = SelectField('Title')
+    text = CKEditorField('editorial_item') #ckeditor

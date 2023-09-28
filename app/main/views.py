@@ -1,7 +1,9 @@
 from flask import render_template, url_for, redirect, flash
 from . import main
 from app import db
-from ..dbModels import LeftMenu, Categories, Jurnals, LeftBar, RightBar, MainData, MainCatalogs, RecentSupplement, IssuesProgress
+from ..dbModels import LeftMenu, Categories, Jurnals, LeftBar, RightBar, MainData
+from ..dbModels import MainCatalogs, RecentSupplement, IssuesProgress
+from ..dbModels import EditorialBoardTitles, EditorialBoardItems
 
 
 
@@ -65,11 +67,27 @@ def public():
     return render_template('publication.html', volumes=volumes, categories_chek=categories_chek)
 
 
+
+
+
 @main.route("/editorial_board/")
 def edition():
     volumes = LeftMenu.query.order_by(LeftMenu.id.desc()).all()
     categories_chek = Categories.query
-    return render_template('edition.html', volumes=volumes, categories_chek=categories_chek)
+
+    titles = EditorialBoardTitles.query.all()
+    items =  EditorialBoardItems.query.all()
+
+    return render_template(
+        'edition.html',
+        volumes=volumes,
+        categories_chek=categories_chek,
+        titles=titles,
+        items=items,
+        )
+
+
+
 
 
 @main.route("/subscription")

@@ -4,12 +4,185 @@ from . import admin
 from app import db
 from ..dbModels import (
     Admins, LeftMenu, Categories, Jurnals, LeftBar,
-    RightBar, MainData, MainCatalogs, RecentSupplement, IssuesProgress
-    )
+    RightBar, MainData, MainCatalogs, RecentSupplement, IssuesProgress,
+    EditorialBoardTitles, EditorialBoardItems)
 from .forms import (
     LoginForm, AddAdminForm, LeftMenuForm, CategoryForm, MainDataForm, RecentSupplementForm,
-    ArticlesForm, EditAdminForm, LeftBarForm, RightBarForm, MainCatalogsForm, IssuesProgressForm
+    ArticlesForm, EditAdminForm, LeftBarForm, RightBarForm, MainCatalogsForm, IssuesProgressForm,
+    EditorialBoardTitleForm, EditorialBoardItemsForm)
+
+
+
+
+@admin.route("/editorial_board_title/<int:col>/<int:handler_type>/<int:id>/<add_type>", methods=['GET', 'POST'])
+def editorial_board_title(col, handler_type, id, add_type):
+    # -----   -----   -----
+    if col != 1 and col != 2: col = 1
+    if col == 1: col_result = True
+    if col == 2: col_result = False
+    # -----   -----   -----   -----
+    if handler_type != 1 and handler_type != 0:
+        handler_type = 1
+    # -----   -----   -----   -----
+    form = EditorialBoardTitleForm()
+    func = 'admin.editorial_board_title'
+    # -----   -----   -----   -----
+
+    if form.validate_on_submit():
+        if handler_type:
+            db.session.add(EditorialBoardTitles(
+                column = col_result,
+                name = form.title_name.data,
+            ))
+            db.session.commit()
+        else:
+            title = EditorialBoardTitles.query.filter_by(id=id).first()
+            if title:
+                title.name = form.title_name.data
+                db.session.add(title)
+                db.session.commit()
+
+        if add_type == 'addMoreBtn':
+            return redirect(url_for(
+                func, col = col,
+                handler_type = handler_type,
+                id = id,
+                add_type = 'None',
+            ))
+        elif add_type == 'addBtn':
+            return redirect(url_for('main.edition'))
+    # -----   -----   -----   -----
+    if handler_type == 0:
+        title = EditorialBoardTitles.query.filter_by(id=id).first()
+        if title: form.title_name.data = title.name
+    # -----   -----   -----   -----
+    return render_template(
+        'editorial_board_title.html',
+        form = form,
+        form_name = f'Add Title {col}',
+        func = func,
+        col = col,
+        id = id,
+        handler_type = handler_type,
     )
+
+
+@admin.route("/editorial_board_title_delete/<int:id>", methods=['GET', 'POST'])
+def editorial_board_title_delete(id):
+    # -----   -----   -----   -----
+    title = EditorialBoardTitles.query.filter_by(id=id).first()
+    if title:
+        db.session.delete(title)
+        db.session.commit()
+
+    return redirect(url_for('main.edition'))
+
+
+
+
+@admin.route("/editorial_board_item/<int:title_id>/<int:handler_type>/<int:id>/<add_type>", methods=['GET', 'POST'])
+def editorial_board_item(title_id, handler_type, id, add_type):
+    title_query = EditorialBoardTitles.query.filter_by(id=title_id).first()
+    
+    if title_query:
+        title_id = title_query.id
+
+        # -----   -----   -----
+        if handler_type != 1 and handler_type != 0:
+            handler_type = 1
+        # -----   -----   -----   -----
+        form = EditorialBoardItemsForm()
+        # Получите данные для choices из вашей модели или другого источника
+        titles = EditorialBoardTitles.query.all()
+        choices_data = []
+        first_tuple = []
+
+        for title in titles:
+            my_tuple = (title.id, title.name)
+
+            if title.id == title_id: first_tuple.append(my_tuple)
+            else: choices_data.append(my_tuple)
+        
+        if len(first_tuple) > 0:
+            choices_data = first_tuple + choices_data
+        # -----   -----   -----   -----
+
+        # Установите default значение для поля SelectField
+        # -----   -----   -----   -----
+        form.title.choices = choices_data
+        # -----   -----   -----   -----
+
+        func = 'admin.editorial_board_item'
+        # -----   -----   -----   -----
+
+        if form.validate_on_submit():
+
+            if handler_type:
+                db.session.add(EditorialBoardItems(
+                    title_id = form.title.data,
+                    text = form.text.data
+                ))
+                db.session.commit()
+
+            else:
+                item = EditorialBoardItems.query.filter_by(id=id).first()
+                if item:
+                    item.title_id = form.title.data
+                    item.text = form.text.data
+                    db.session.add(item)
+                    db.session.commit()
+
+            # -----   -----   -----   -----
+
+            if add_type == 'addMoreBtn':
+                flash('Успешно выполнено!')
+                return redirect(url_for(
+                    func, title_id = title_id,
+                    handler_type = handler_type,
+                    id = id,
+                    add_type = 'None',
+                ))
+            
+            elif add_type == 'addBtn':
+                flash('Успешно выполнено!')
+                return redirect(url_for('main.edition'))
+            
+        # -----   -----   -----   -----
+        if handler_type == 0:
+            item = EditorialBoardItems.query.filter_by(id=id).first()
+            if item: form.text.data = item.text
+
+    # -----   -----   -----   -----
+    else:
+        flash('Title не найден!')
+        return redirect(url_for('main.edition'))
+    # -----   -----   -----   -----
+    return render_template(
+        'editorial_board_item.html',
+        form = form,
+        form_name = 'Add Item',
+        func = func,
+        title_id = title_id,
+        id = id,
+        handler_type = handler_type,
+        titles = titles,
+    )
+
+
+@admin.route("/editorial_board_item_delete/<int:id>", methods=['GET', 'POST'])
+def editorial_board_item_delete(id):
+    # -----   -----   -----   -----
+    item = EditorialBoardItems.query.filter_by(id=id).first()
+    if item:
+        db.session.delete(item)
+        db.session.commit()
+
+    return redirect(url_for('main.edition'))
+
+
+
+
+
 
 
 

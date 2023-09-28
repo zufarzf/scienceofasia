@@ -5,86 +5,152 @@ block main %}
         <div class="edition_image">
             <img src="{{ url_for('main.static', filename='images/editorialboard.jpg') }}" alt="">
         </div>
+        <div class="edition_image">
+
+            {% if 'login' in session %}
+            <a href="{{ url_for('admin.editorial_board_title', col=1, handler_type=1, id=0, add_type='None') }}"
+                class="admin_link add_btn">
+                Add Title Col 1
+            </a>
+
+            <a href="{{ url_for('admin.editorial_board_title', col=2, handler_type=1, id=0, add_type='None') }}"
+                class="admin_link add_btn">
+                Add Title Col 2
+            </a>
+            {% endif %}
+
+        </div>
 
         <div class="max-width">
             <div class="ed_main_part">
                 <div class="center_block-ed">
+
                     <div class="first_ed_block">
+
+                        {% for title in titles %}
+
+                        {% if title.column %}
                         <div class="part_one">
-                            <div class="title_ed">Advisory Committee</div>
+                            <div class="title_ed">
+                                <span>
+                                    <p>{{ title.name }}</p>
+
+                                    {% if 'login' in session %}
+                                    <div class="item_btn_wrapper">
+                                        <a href="{{ url_for('admin.editorial_board_title', col=1, handler_type=0, id=title.id, add_type='None') }}"
+                                            class="add_item_btn">
+                                            Edit
+                                        </a>
+                                        <p> | </p>
+                                        <a href="{{ url_for('admin.editorial_board_title_delete', id=title.id) }}"
+                                            class="add_item_btn">
+                                            Delete
+                                        </a>
+                                    </div>
+                                    {% endif %}
+
+                                </span>
+                            </div>
+
+                            {% if 'login' in session %}
+                            <a href="{{ url_for('admin.editorial_board_item', title_id=title.id, handler_type=1, id=0, add_type='None') }}"
+                                class="add_item_btn">
+                                <b>Add item +</b>
+                            </a>
+                            {% endif %}
+
                             <ul class="left_part_ul_ed">
-                                <li><b>M.R. Jisnuson Svasti</b> Mahidol University, Thailand</li>
-                                <li><b>Napavarn Noparatnaraporn</b> Science Society of Thailand</li>
-                                <li><b>Supot Hannongbua</b> Chulalongkorn University, Thailand</li>
-                                <li><b>Supawan Tantayanon</b> Science Society of Thailand</li>
-                                <li><b>Wiparat Dee-ong</b> National Research Council of Thailand</li>
-                            </ul>
-                        </div>
-                        <div class="part_two">
-                            <div class="title_ed">Editorial Board</div>
-                            <ul class="left_part_ul_ed">
-                                <li><b>Ashwani K. Rai</b> Banaras Hindu University, India</li>
-                                <li><b>Bin Liu</b> Peking University, China</li>
-                                <li><b>Hideyuki Suzuki</b> Kyoto Institute of Technology, Japan</li>
-                                <li><b>Jae Hyon Kim</b> Dongduk Women's University, Korea</li>
-                                <li><b>Kesara Anamthawat Jónsson </b>University of Iceland, Iceland</li>
-                                <li><b>Peter Wolschann</b> University of Vienna, Austria</li>
-                                <li><b>Sheila Nathan</b> Universiti Kebangsaan, Malaysia</li>
-                                <li><b>Tarique Hussain</b> Nuclear Institute for Agriculture and Biology, Pakistan</li>
-                                <li><b>Tatas Brotosudarmo</b> Machung University, Indonesia</li>
-                                <li><b>Wai-yeung Wong</b> Hong Kong Polytechnic University, Hong Kong</li>
-                                <li><b>Yon Rojanasakul</b> West Virginia University, USA</li>
-                                <li><b>Benjavan Rerkasem</b> Chiang Mai University, Thailand</li>
-                                <li><b>David Ruffolo</b> Mahidol University, Thailand</li>
-                                <li><b>James R. Ketudat-Cairns</b> Suranaree University of Technology, Thailand</li>
-                                <li><b>Jumras Limtrakul</b> Vidyasirimedhi Institute of Science and Technology, Thailand
+                                {% for item in items %}
+
+                                {% if item.title_id == title.id %}
+                                <li>
+                                    <span>
+                                        <p>{{ item.text | safe }}</p>
+                                        {% if 'login' in session %}
+                                        <div class="item_btn_wrapper">
+                                            <a href="{{ url_for('admin.editorial_board_item', title_id=title.id, handler_type=0, id=item.id, add_type='None') }}"
+                                                class="add_item_btn item_btn">Edit</a>
+                                            <p> | </p>
+                                            <a href="{{ url_for('admin.editorial_board_item_delete', id=item.id) }}"
+                                                class="add_item_btn item_btn">Delete</a>
+                                        </div>
+                                        {% endif %}
+                                    </span>
                                 </li>
-                                <li><b>Phadungsak Rattanadecho</b> Thammasat University, Thailand</li>
-                                <li><b>Punya Jarusiri </b>Punya Jarusiri Chulalongkorn University, Thailand</li>
-                                <li><b>Sompong Dhompongsa</b> Chiang Mai University, Thailand</li>
-                                <li><b>Soottawat Benjakul </b>Prince of Songkla University, Thailand</li>
-                                <li><b>Sopit Wongkham </b>Khon Kaen University, Thailand</li>
-                                <li><b>Tirayut Vilaivan</b> Chulalongkorn University, Thailand</li>
-                                <li><b>Watanalai Panbangred</b> Mahidol University, Thailand</li>
+                                {% endif %}
+
+                                {% endfor %}
                             </ul>
                         </div>
+                        {% endif %}
+
+                        {% endfor %}
+
                     </div>
+
                     <div class="second_ed_block">
+
+                        {% for title in titles %}
+
+                        {% if not title.column %}
                         <div class="parts_ed">
-                            <div class="title_ed">Editor-in-Chief</div>
+                            <div class="title_ed">
+                                <span>
+                                    <p>{{ title.name }}</p>
+
+                                    {% if 'login' in session %}
+                                    <div class="item_btn_wrapper">
+                                        <a href="{{ url_for('admin.editorial_board_title', col = 2, handler_type = 0, id=title.id, add_type = 'None') }}"
+                                            class="add_item_btn">
+                                            Edit
+                                        </a>
+                                        <p> | </p>
+                                        <a href="{{ url_for('admin.editorial_board_title_delete', id=title.id) }}"
+                                            class="add_item_btn">
+                                            Delete
+                                        </a>
+                                    </div>
+                                    {% endif %}
+
+                                </span>
+                            </div>
+
+                            {% if 'login' in session %}
+                            <a href="{{ url_for('admin.editorial_board_item', title_id=title.id, handler_type=1, id=0, add_type='None') }}"
+                                class="add_item_btn">
+                                <b>Add item +</b>
+                            </a>
+                            {% endif %}
+
                             <ul class="left_part_ul_ed">
-                                <li><b>Piamsook Pongsawasdi (piamsook.p@chula.ac.th) </b>Chulalongkorn University,
-                                    Thailand</li>
-                            </ul>
-                        </div>
-                        <div class="parts_ed">
-                            <div class="title_ed">Editors</div>
-                            <ul class="left_part_ul_ed">
-                                <li><b>Aran Incharoensakdi (aran.i@chula.ac.th)</b> Chulalongkorn University, Thailand
+                                {% for item in items %}
+
+                                {% if item.title_id == title.id %}
+                                <li>
+                                    <span>
+                                        <p>{{ item.text | safe }}</p>
+                                        {% if 'login' in session %}
+                                        <div class="item_btn_wrapper">
+                                            <a href="{{ url_for('admin.editorial_board_item', title_id=title.id, handler_type=0, id=item.id, add_type='None') }}"
+                                                class="add_item_btn item_btn">Edit</a>
+                                            <p> | </p>
+                                            <a href="{{ url_for('admin.editorial_board_item_delete', id=item.id) }}"
+                                                class="add_item_btn item_btn">
+                                                Delete
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                    </span>
                                 </li>
-                                <li><b>Paisan Nakmahachalasint (paisan.n@chula.ac.th)</b> Chulalongkorn University,
-                                    Thailand</li>
-                                <li><b>Sirirat Rengpipat (sirirat.r@chula.ac.th)</b> Chulalongkorn University, Thailand
-                                </li>
-                                <li><b>Supa Hannongbua (fscisph@ku.ac.th)</b> Kasetsart University, Thailand</li>
-                                <li><b>Xian-Ming Gu (guxianming@live.cn)</b> Southwestern University of Finance and
-                                    Economics, China</li>
+                                {% endif %}
+
+                                {% endfor %}
                             </ul>
                         </div>
-                        <div class="parts_ed">
-                            <div class="title_ed">Managing Editor</div>
-                            <ul class="left_part_ul_ed">
-                                <li><b>Khamron Mekchay (khamron.m@chula.ac.th)</b> Chulalongkorn University, Thailand
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="parts_ed">
-                            <div class="title_ed">Assistants to Editors</div>
-                            <ul class="left_part_ul_ed">
-                                <li><b>Mongkon Youngtanurat</b> ScienceAsia Office</li>
-                                <li><b>Yuttapon Taragan</b> Science Society of Thailand</li>
-                            </ul>
-                        </div>
+                        {% endif %}
+
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>
@@ -92,7 +158,47 @@ block main %}
     </div>
 </div>
 
+{% if 'login' in session %}
+<style>
+    ul.left_part_ul_ed li span {
+        display: flex;
+        align-items: center;
+    }
 
+    .title_ed span {
+        display: flex;
+        align-items: center;
+    }
+</style>
+{% endif %}
+
+<style>
+    .add_btn {
+        font-weight: 900;
+        margin: 20px 20px 30px 20px;
+    }
+
+    a.add_item_btn {
+        display: block;
+        margin: 15px 5px;
+        text-decoration: underline;
+        color: rgb(20, 74, 175);
+    }
+
+    a.item_btn {
+        color: rgb(102, 3, 0);
+    }
+
+    .item_btn_wrapper {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+    }
+
+    .item_btn_wrapper p {
+        margin: 0 6px;
+    }
+</style>
 
 
 {% endblock %}

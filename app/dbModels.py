@@ -128,3 +128,24 @@ class IssuesProgress(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(300))
     link = db.Column(db.String(300))
+
+
+
+
+
+
+class EditorialBoardTitles(db.Model):
+    __tablename__ = 'editorial_board_titles'
+    id = db.Column(db.Integer, primary_key=True)
+    column = db.Column(db.Boolean, default=True)
+    name = db.Column(db.String(300))
+    # -----   -----   -----   -----   -----   -----   -----   -----   -----   -----   -----   -----
+    editorial_board_items = db.relationship('EditorialBoardItems', backref='title', lazy='dynamic')
+
+
+class EditorialBoardItems(db.Model):
+    __tablename__ = 'editorial_board_items'
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text)
+    # -----   -----   -----   -----   -----   -----   -----   -----   -----
+    title_id = db.Column(db.Integer, db.ForeignKey('editorial_board_titles.id'))
