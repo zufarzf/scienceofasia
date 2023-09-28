@@ -71,9 +71,12 @@ def editorial_board_title(col, handler_type, id, add_type):
 def editorial_board_title_delete(id):
     # -----   -----   -----   -----
     title = EditorialBoardTitles.query.filter_by(id=id).first()
+    
     if title:
-        db.session.delete(title)
-        db.session.commit()
+        items = EditorialBoardItems.query.filter_by(title_id=title.id).all()
+        if len(items) == 0:
+            db.session.delete(title)
+            db.session.commit()
 
     return redirect(url_for('main.edition'))
 
