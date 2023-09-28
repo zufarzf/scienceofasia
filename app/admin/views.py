@@ -70,7 +70,7 @@ def editorial_board_title(col, handler_type, id, add_type):
 @admin.route("/editorial_board_title_delete/<int:id>", methods=['GET', 'POST'])
 def editorial_board_title_delete(id):
     # -----   -----   -----   -----
-    items = EditorialBoardItems.query.filter_by(title_id=title.id).all()
+    items = EditorialBoardItems.query.all()
     for i in items:
             db.session.delete(i)
             db.session.commit()
