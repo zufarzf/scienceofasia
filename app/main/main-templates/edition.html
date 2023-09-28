@@ -63,7 +63,7 @@ block main %}
                                 {% for item in items %}
 
                                 {% if item.title_id == title.id %}
-                                <li>
+                                <li class="item_li">
                                     <span>
                                         <p>{{ item.text | safe }}</p>
                                         {% if 'login' in session %}
@@ -126,7 +126,7 @@ block main %}
                                 {% for item in items %}
 
                                 {% if item.title_id == title.id %}
-                                <li>
+                                <li class="item_li">
                                     <span>
                                         <p>{{ item.text | safe }}</p>
                                         {% if 'login' in session %}
@@ -173,6 +173,10 @@ block main %}
 {% endif %}
 
 <style>
+    li.item_li {
+        list-style: none;
+    }
+
     .add_btn {
         font-weight: 900;
         margin: 20px 20px 30px 20px;
