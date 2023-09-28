@@ -75,8 +75,8 @@ def edition():
     volumes = LeftMenu.query.order_by(LeftMenu.id.desc()).all()
     categories_chek = Categories.query
 
-    titles = EditorialBoardTitles.query.all()
-    items =  EditorialBoardItems.query.all()
+    titles = EditorialBoardTitles.query.order_by(EditorialBoardTitles.id).all()
+    items =  EditorialBoardItems.query.order_by(EditorialBoardItems.id).all()
 
     return render_template(
         'edition.html',
