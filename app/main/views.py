@@ -190,8 +190,8 @@ def min_dict(values_list:list):
         
         print()
         print()
-        print(f'counter[doi_text]= {counter['doi_text']}')
-        print(f'i[doi_text]= {i['doi_text']}')
+        print(f'counter[doi_text]= {counter["doi_text"]}')
+        print(f'i[doi_text]= {i["doi_text"]}')
         print()
         print()
     
