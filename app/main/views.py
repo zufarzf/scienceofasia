@@ -187,6 +187,14 @@ def min_dict(values_list:list):
     for i in values_list:
         counter_number = get_page_first_number(counter['doi_text'])
         page_first_number = get_page_first_number(i['doi_text'])
+        
+        print()
+        print()
+        print(f'counter[doi_text]= {counter['doi_text']}')
+        print(f'i[doi_text]= {i['doi_text']}')
+        print()
+        print()
+    
         if int(page_first_number) < int(counter_number):
             counter = i
     return counter
@@ -225,12 +233,6 @@ def volume_1(id):
             jurnals_list.append(article_dict)
         
         while len(jurnals_list) != 0:
-            print()
-            print()
-            print(f'jurnals_list= {jurnals_list}')
-            print()
-            print()
-            
             small_dict = min_dict(jurnals_list)
             sort_list.append(jurnals_list.pop(jurnals_list.index(small_dict)))
 
