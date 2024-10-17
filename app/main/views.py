@@ -198,7 +198,7 @@ def min_dict(values_list:list):
             if int(page_first_number) < int(counter_number):
                 counter = i
         except:
-            continue
+            counter = i
     return counter
 # ==================================
 
