@@ -1,8 +1,6 @@
 /env
-/venv
 /__pycache__
 /app/__pycache__
 /app/admin/__pycache__
 /app/main/__pycache__
-/app/main/main-static/upload_files
-/migrations
+.gitignore
