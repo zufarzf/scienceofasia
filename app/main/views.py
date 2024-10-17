@@ -188,17 +188,18 @@ def min_dict(values_list:list):
         counter_number = get_page_first_number(counter['doi_text'])
         page_first_number = get_page_first_number(i['doi_text'])
         
-        print()
-        print()
-        print(f'counter[doi_text]= {counter["doi_text"]}')
-        print(f'i[doi_text]= {i["doi_text"]}')
-        print()
-        print()
         try:
             if int(page_first_number) < int(counter_number):
                 counter = i
         except:
             counter = i
+            print()
+            print()
+            print(f'counter[doi_text]= {counter["doi_text"]}')
+            print(f'i[doi_text]= {i["doi_text"]}')
+            print()
+            print()
+            
     return counter
 # ==================================
 
