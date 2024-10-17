@@ -225,6 +225,12 @@ def volume_1(id):
             jurnals_list.append(article_dict)
         
         while len(jurnals_list) != 0:
+            print()
+            print()
+            print(f'jurnals_list= {jurnals_list}')
+            print()
+            print()
+            
             small_dict = min_dict(jurnals_list)
             sort_list.append(jurnals_list.pop(jurnals_list.index(small_dict)))
 
