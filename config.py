@@ -9,6 +9,11 @@ class Config:
     SQLALCHEMY_ON_TEARDOWN = True
 
 
+class TestingConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = db_uri.get('sqlite')
+
+
 class DevConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = db_uri.get('postgresql')
@@ -23,5 +28,6 @@ config = {
     'default': DevConfig,
 
     'dev': DevConfig,
-    'prod': ProdConfig
+    'prod': ProdConfig,
+    'test': TestingConfig,
 }
