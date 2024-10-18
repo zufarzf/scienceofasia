@@ -14,3 +14,9 @@ ip: 139.162.44.150
 root: fK7]^4X[_@?+Q+Vt
 user: S]_2yZZQ4}=SQ7f^
 postgres: ##m+k6pXA8*MWh#^
+
+
+sudo pkill gunicorn
+sudo supervisorctl update
+sudo supervisorctl restart all
+sudo systemctl restart nginx
